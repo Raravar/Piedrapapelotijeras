@@ -1,16 +1,27 @@
-// Juego simple de piedra papel o tijeras desarrollado por Raravar.
+// Juego simple de piedra papel o tijeras desarrollado por Raravar
 
+/*Por hacer:
+- Guardar puntuacion y nombre del jugador en txt
+- Cargar la informacion del ultimo jugador 
+*/
+
+#include <stdio.h>
 #include <stdlib.h>
-char jugador[10];
-signed int puntuacion;
 
-void guardado();
+char jugador[10] = "data";
+unsigned char puntuacion = 0;
 
-int main()
+void registro()
 {
     printf("Ingrese su nombre de jugador : ");
     scanf("%s", jugador);
     printf("Bienvenido %s", jugador);
-    return 0;
+    FILE *fp;
+    fp  = fopen ("data.txt", "w");
+};
 
+int main()
+{
+    registro();
+    return 0;
 };
