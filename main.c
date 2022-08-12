@@ -1,24 +1,38 @@
 // Juego simple de piedra papel o tijeras desarrollado por Raravar
 
 /*Por hacer:
-- Guardar puntuacion y nombre del jugador en txt
-- Cargar la informacion del ultimo jugador 
+- Desarrollar Jugadas y algoritmo de juego
+- Desarrollar jugadas del PC como respuesta
+- Guardar la puntuacion en el archivo correspondiente al nombre del jugador
 */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-char jugador[10] = "";
-unsigned char puntuacion = 5;
+int buffer;
+char jugador[15] = "";
+char nomArchivo[15] = "";
+char puntuacion = 8;
 
 void registro()
 {
     printf("Ingrese su nombre de jugador : ");
     scanf("%s", jugador);
-    printf("Bienvenido %s", jugador);
-    strcat(jugador, ".txt");
-    FILE * archivo = fopen(jugador, "w+");
-    fprintf(archivo,"%d", puntuacion);
+    memcpy(nomArchivo, jugador, sizeof(jugador)); // Copiamos los caracteres basados en el num y direccion de memoria de Jugador
+    strcat(nomArchivo, ".dat");
+
+    FILE *archivo;  // Puntero para la creacion de archivo
+    if(archivo == NULL)
+    {
+        archivo = fopen(nomArchivo, "w");
+        fwrite(&puntuacion, sizeof(int), 1, archivo);
+        fclose(archivo);
+    }
+    archivo = fopen(nomArchivo, "r");
+    fread(&buffer, sizeof(int), 1, archivo);
+    printf("Bienvenido %s, su puntuacion actual es: %d\n", jugador, buffer);
+    fclose(archivo);
 };
 
 int main()
