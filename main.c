@@ -13,7 +13,7 @@
 int buffer;
 char jugador[15] = "";
 char nomArchivo[15] = "";
-char puntuacion = 8;
+char puntuacion = 0;
 
 void registro()
 {
@@ -23,6 +23,7 @@ void registro()
     strcat(nomArchivo, ".dat");
 
     FILE *archivo;  // Puntero para la creacion de archivo
+    archivo = fopen(nomArchivo, "r");
     if(archivo == NULL)
     {
         archivo = fopen(nomArchivo, "w");
